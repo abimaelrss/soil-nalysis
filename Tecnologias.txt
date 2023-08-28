@@ -1,0 +1,31 @@
+Frameworks backend
+
+--- comandos ---
+	* iniciar o projeto: npm init -y
+	* instalar o express: npm install express --save
+		(gerar pasta node_modules: npm install)
+	* criar pasta src
+	* criar o arquivo server.js
+
+* Nodejs
+* Express - gerenciador de requisições HTTP
+* Nodemon - 
+* Insomnia - 
+* SQLite - 
+* SGBD - beekeeper
+* Bcrypt - criptogradia de senha
+* Query builder / Knex.js - Migrations
+
+Frameworks frontend
+
+* Reactjs
+* Vite - set up
+* Styled components
+* React Router DOM
+
+-- extenções -- 
+* vscode-styled-components
+* Path Intellisense
+* Material Icon Theme
+* React icons - npm install react-icons
+* Auto Close Tag
