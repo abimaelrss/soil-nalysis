@@ -53,7 +53,7 @@ export function Areas() {
 
       <Content>
 
-      <Navigation title="Propriedades" />
+      <Navigation title="Areas" />
 
         <Section title="Minhas áreas">
           {

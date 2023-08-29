@@ -13,7 +13,7 @@ import { New } from '../../components/New';
 import { Input } from '../../components/Input';
 import { Section } from '../../components/Section';
 import { Note } from '../../components/Note';
-import { ButtonText } from '../../components/ButtonText';
+import { Navigation } from '../../components/Navigation';
 
 export function Reports() {
   const [search, setSearch] = useState("");
@@ -50,20 +50,27 @@ export function Reports() {
 
       <Content>
 
-        <Section title="Relatórios">
-          {
-            notes.map(note => (
-              <Note
-                key={String(note.id)}
-                data={note}
-                onClick={() => handleDetails(note.id)}
-              />
-            ))
-          }
-        </Section>
+        <Navigation title="Relatórios" />
+
+        <main>
+
+          <Section title="Relatórios">
+            {
+              notes.map(note => (
+                <Note
+                  key={String(note.id)}
+                  data={note}
+                  onClick={() => handleDetails(note.id)}
+                />
+              ))
+            }
+          </Section>
+
+        </main>
+
       </Content>
 
-      <New to="/newReport"/>
+      <New to="/newReport" />
 
       {/* <New to="/newReport">
         <FiPlus />

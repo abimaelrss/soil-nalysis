@@ -7,7 +7,7 @@ import { api } from '../../services/api';
 import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
 
 import { Container, Profile, Logout, Farm } from './styles';
-import { Input } from '../Input';
+import { Note } from '../Note';
 
 export function Header() {
   const { signOut, user } = useAuth();
@@ -16,8 +16,9 @@ export function Header() {
 
   const [search, setSearch] = useState("");
   const [properties, setProperties] = useState([]);
+  const [selectProperty, setSelectProperty] = useState([]);
 
-  function handleSignOu() {
+  function handleSignOut() {
     navigation("/");
     signOut();
   }
@@ -47,14 +48,28 @@ export function Header() {
       </Profile>
 
       <Farm>
-        <select name="" id="">
-          <option value="" selected>Todas as propriedades</option>
-          <option value="">Propriedade 1</option>
-          <option value="">Propriedade 2</option>
+        <select
+          value={selectProperty}
+          onChange={e => setSelectProperty(e.target.value)}
+        >
+          <option value="">Selecione a propriedade</option>
+          {
+            properties.map(property => (
+              <option value={property.id}>
+                {property.name}
+                {/* <Note
+                  key={String(property.id)}
+                  data={property}
+                  onClick={() => handleDetails(properties.id)}
+                /> */}
+              </option>
+            ))
+          }
         </select>
+        
       </Farm>
 
-      <Logout onClick={handleSignOu}>
+      <Logout onClick={handleSignOut}>
         <RiShutDownLine />
       </Logout>
 

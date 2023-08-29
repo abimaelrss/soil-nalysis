@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FiPlus, FiArrowLeft } from 'react-icons/fi';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -79,12 +80,17 @@ export function NewProperty() {
               title="Voltar"
               color=""
               onClick={handleBack}
-            />
+            >
+              <FiArrowLeft />
+            </Button>
             <Button
               title="Salvar"
               color="save"
               onClick={handleNewProperty}
-            />
+            >
+              <FiPlus />
+            </Button>
+
           </div>
 
         </Form>

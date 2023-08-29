@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FiPlus, FiArrowLeft } from 'react-icons/fi';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -50,7 +51,7 @@ export function NewReport() {
     setTags(prevState => prevState.filter(tag => tag !== deleted));
   }
 
-  async function handleNewReport() {
+  async function handleNewProperty() {
     if (!title) {
       return alert("Digite o título da nota!");
     }
@@ -98,12 +99,17 @@ export function NewReport() {
               title="Voltar"
               color=""
               onClick={handleBack}
-            />
+            >
+              <FiArrowLeft />
+            </Button>
             <Button
               title="Salvar"
               color="save"
-              onClick={handleNewReport}
-            />
+              onClick={handleNewProperty}
+            >
+              <FiPlus />
+            </Button>
+
           </div>
 
         </Form>

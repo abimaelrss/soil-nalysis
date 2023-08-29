@@ -19,6 +19,10 @@ export function Home() {
 
   const navigate = useNavigate();
 
+  // async function selectProperties() {
+  //   const response = await api.get(`/properties?user_id=${}`);
+  // };
+
   useEffect(() => {
     async function fetchProperties() {
       const response = await api.get(`/properties?name=${search}`);
@@ -38,14 +42,15 @@ export function Home() {
       <Menu />
 
       <Content>
-        <Article title="Demonstrativo da propriedade" >
-
-        </Article>
-
-        <Article title="Demonstrativo da propriedade" >
-
-        </Article>
         
+        <Article title="Demonstrativo da propriedade" >
+
+        </Article>
+
+        <Article title="Demonstrativo da propriedade" >
+
+        </Article>
+
       </Content>
 
     </Container>

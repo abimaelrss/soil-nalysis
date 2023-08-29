@@ -10,7 +10,7 @@ import { Brand } from '../../components/Brand';
 import { Header } from '../../components/Header';
 import { Menu } from '../../components/Menu';
 import { New } from '../../components/New';
-import { Input } from '../../components/Input';
+import { Navigation } from '../../components/Navigation';
 import { Section } from '../../components/Section';
 import { Note } from '../../components/Note';
 
@@ -44,6 +44,9 @@ export function Analyzes() {
       </Search> */}
 
       <Content>
+
+      <Navigation title="Análises" />
+
         <Section title="Minhas análises">
           {
             analyzes.map(analysis => (

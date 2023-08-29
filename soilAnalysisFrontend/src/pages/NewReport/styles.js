@@ -12,17 +12,6 @@ export const Container = styled.div`
   "menu content"
   "menu content"
   "menu content";
-
-  > main {
-    grid-area: content;
-    overflow-y: auto;
-  }
-
-  .tags {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
 `;
 
 export const Content = styled.div`

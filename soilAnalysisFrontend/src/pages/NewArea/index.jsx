@@ -1,12 +1,10 @@
-import { useState } from 'react';
+import { FiArrowLeft, FiPlus } from 'react-icons/fi';
 
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
-import { TextArea } from '../../components/TextArea';
-import { NoteItem } from '../../components/NoteItem';
-import { Section } from '../../components/Section';
 import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
 
@@ -98,13 +96,18 @@ export function NewArea() {
               title="Voltar"
               color=""
               onClick={handleBack}
-            />
+            >
+              <FiArrowLeft />
+            </Button>
+            
             <Button
               title="Salvar"
               color="save"
               onClick={handleNewArea}
-            />
-            
+            >
+              <FiPlus />
+            </Button>
+
           </div>
 
         </Form>

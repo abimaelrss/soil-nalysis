@@ -69,7 +69,9 @@ export function Properties() {
               ))
             }
           </Section>
+
         <Baseboard />
+        
         </main>
 
       </Content>

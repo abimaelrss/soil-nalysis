@@ -12,18 +12,16 @@ export const Container = styled.div`
   "menu content"
   "menu content"
   "menu content";
-
-  > main {
-    grid-area: content;
-    overflow-y: auto;
-  }
-
-  .tags {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
 `;
+
+export const Content = styled.div`
+  grid-area: content;
+
+  display: flex;
+  gap: 10px;
+  padding: 0 34px;
+  overflow-y: auto;
+`
 
 export const Form = styled.div`
   max-width: 550px;
@@ -35,11 +33,6 @@ export const Form = styled.div`
     justify-content: space-between;
 
     margin-bottom: 36px;
-
-    button {
-      font-size: 20px;
-      color: ${({ theme }) => theme.COLORS.GRAY_100};
-    }
   }
 
   .baseboard {
@@ -54,13 +47,4 @@ export const Form = styled.div`
     /* background-color: ${({ theme }) => theme.COLORS.BACKGROUND_700}; */
     background-color: rgb(255, 255, 255);
   }
-`;
-
-export const Content = styled.div`
-  grid-area: content;
-
-  display: flex;
-  gap: 10px;
-  padding: 0 34px;
-  overflow-y: auto;
 `;
