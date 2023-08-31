@@ -5,6 +5,7 @@ import { Routes } from './routes';
 import { ThemeProvider } from 'styled-components';
 
 import { AuthProvider } from './hooks/auth';
+import { PropertyProvider } from './hooks/propertyProvider';
 
 import GlobalStyle from './styles/global';
 
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <AuthProvider>
-        <Routes />
+        <PropertyProvider>
+          <Routes />
+        </PropertyProvider>
       </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>

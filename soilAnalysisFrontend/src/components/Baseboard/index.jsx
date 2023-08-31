@@ -8,7 +8,7 @@ export function Baseboard({ title, children }) {
       <div>
         <Button
           title="Voltar"
-          color=""
+          color="back"
         />
       </div>
 

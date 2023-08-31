@@ -14,19 +14,19 @@ export const Container = styled.button`
     if (props.color == "delete") {
       return "#FF6347"
     }
+    if (props.color == "back") {
+      return "#F1F1F1"
+    }
   }};
   color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
 
-  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
 
-  width: 100px;
+  width: 110px;
   height: 36px;
   border: 0;
   padding: 0 16px;
-  margin-top: 16px;
   border-radius: 10px;
   font-weight: 500;
 

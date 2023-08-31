@@ -93,19 +93,17 @@ export function Details() {
               </Section>
             }
 
-            <Section title="Ações">
-              <Button
-                title="Alterar"
-                color="alter"
-                />
+            <Button
+              title="Alterar"
+              color="alter"
+            />
 
-              <Button
-                title="Excluir"
-                color="delete"
-                onClick={handleRemove}
-              />
+            <Button
+              title="Excluir"
+              color="delete"
+              onClick={handleRemove}
+            />
 
-            </Section>
           </Content>
         </main>
       }

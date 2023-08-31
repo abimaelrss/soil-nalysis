@@ -13,8 +13,8 @@ function AuthProvider({ children }) {
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
 
-      localStorage.setItem("@pecmaster:user", JSON.stringify(user));
-      localStorage.setItem("@pecmaster:token", token);
+      localStorage.setItem("@soilanalysis:user", JSON.stringify(user));
+      localStorage.setItem("@soilanalysis:token", token);
 
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setData({ user, token });
@@ -29,8 +29,8 @@ function AuthProvider({ children }) {
   }
 
   function signOut() {
-    localStorage.removeItem("@pecmaster:user");
-    localStorage.removeItem("@pecmaster:token");
+    localStorage.removeItem("@soilanalysis:user");
+    localStorage.removeItem("@soilanalysis:token");
 
     setData({});
   }
@@ -48,12 +48,12 @@ function AuthProvider({ children }) {
 
       await api.put("/users", user);
       console.log(user);
-      localStorage.setItem("@pecmaster:user", JSON.stringify(user));
+      localStorage.setItem("@soilanalysis:user", JSON.stringify(user));
 
       
 
       setData({ user, token: data.token });
-      localStorage.setItem("@pecmaster:user", JSON.stringify(user));
+      localStorage.setItem("@soilanalysis:user", JSON.stringify(user));
 
       setData({ user, token: data.token });
 
@@ -69,8 +69,8 @@ function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const user = localStorage.getItem("@pecmaster:user");
-    const token = localStorage.getItem("@pecmaster:token");
+    const user = localStorage.getItem("@soilanalysis:user");
+    const token = localStorage.getItem("@soilanalysis:token");
 
     if (user && token) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -87,7 +87,8 @@ function AuthProvider({ children }) {
       signIn,
       signOut,
       updateProfile,
-      user: data.user
+      user: data.user,
+      token: data.token
     }}
     >
       {children}

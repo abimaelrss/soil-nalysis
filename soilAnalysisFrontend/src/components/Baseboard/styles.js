@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: space-between;
 
   /* background-color: ${({ theme }) => theme.COLORS.BACKGROUND_700}; */
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
 
   > h2 {
     border-bottom: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};

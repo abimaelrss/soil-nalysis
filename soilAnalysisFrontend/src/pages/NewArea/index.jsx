@@ -13,14 +13,18 @@ import { api } from '../../services/api';
 import { Container, Content, Form } from './styles';
 import { Brand } from '../../components/Brand';
 import { Menu } from '../../components/Menu';
+import { PropertyProvider, useProperty } from '../../hooks/propertyProvider';
+import { useAuth } from '../../hooks/auth';
 
 export function NewArea() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [size, setSize] = useState("");
 
-  const [user, setUser] = useState("");
-  const [user_id, setUser_id] = useState("");
+  const {user} = useAuth();
+  const user_id = user.user_id;
+
+  const { selectedProperty } = useProperty();
 
   const navigate = useNavigate();
 
@@ -45,6 +49,7 @@ export function NewArea() {
       name,
       description,
       size,
+      property_id:selectedProperty,
       user_id
     });
 
@@ -64,11 +69,6 @@ export function NewArea() {
       <Content>
 
         <Form>
-          <select name="propriedade" id="">
-            <option value="" selected>Selecione</option>
-            <option value="">propriedade 1</option>
-            <option value="">propriedade 2</option>
-          </select>
           <h1>Cadastrar áreas</h1>
           <ButtonText
             title="Voltar"
@@ -99,7 +99,7 @@ export function NewArea() {
             >
               <FiArrowLeft />
             </Button>
-            
+
             <Button
               title="Salvar"
               color="save"

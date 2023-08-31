@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FiPlus, FiSearch, FiArrowLeft } from 'react-icons/fi';
+import { Link, useNavigate } from 'react-router-dom';
+import { FiPlus, FiSearch, FiArrowLeft, FiDelete } from 'react-icons/fi';
+import { GrUpdate } from 'react-icons/gr';
 
 import { api } from '../../services/api';
 
@@ -23,8 +24,21 @@ export function Properties() {
 
   const navigate = useNavigate();
 
+  function handleBack() {
+    navigate(-1);
+  }
+
   function handleDetails(id) {
     navigate(`/details/${id}`);
+  }
+
+  async function handleRemove() {
+    const confirm = window.confirm("Deseja realmente remover a propriedade?");
+
+    if (confirm) {
+      await api.delete(`/properties/${params.id}`);
+      navigate(-1);
+    }
   }
 
   useEffect(() => {
@@ -58,7 +72,50 @@ export function Properties() {
         <Navigation title="Propriedades" />
 
         <main>
-          <Section>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Tamanho</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                properties.map(property => (
+                  <tr key={property.id}>
+                    <td>
+                      {property.name}
+                    </td>
+                    <td>
+                      {property.size}
+                    </td>
+                    <td>
+                      <Button
+                        title="Aterar"
+                        color="alter"
+                        onClick={() => handleDetails(property.id)}
+                      >
+                        <GrUpdate />
+                      </Button>
+
+                      <Button
+                        title="Deletar"
+                        color="delete"
+                        onClick={() => handleRemove(property.id)}
+                      >
+                        <FiDelete />
+
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+
+          {/* <Section>
             {
               properties.map(property => (
                 <Note
@@ -68,10 +125,8 @@ export function Properties() {
                 />
               ))
             }
-          </Section>
+          </Section> */}
 
-        <Baseboard />
-        
         </main>
 
       </Content>

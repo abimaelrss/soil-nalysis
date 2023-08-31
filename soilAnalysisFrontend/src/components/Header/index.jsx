@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { RiShutDownLine } from 'react-icons/ri';
+
 import { useAuth } from '../../hooks/auth';
+import { useProperty } from '../../hooks/propertyProvider';
 
 import { api } from '../../services/api';
 import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
@@ -11,26 +13,14 @@ import { Note } from '../Note';
 
 export function Header() {
   const { signOut, user } = useAuth();
+  const { properties, selectedProperty, setSelectedProperty } = useProperty();
 
   const navigation = useNavigate();
-
-  const [search, setSearch] = useState("");
-  const [properties, setProperties] = useState([]);
-  const [selectProperty, setSelectProperty] = useState([]);
 
   function handleSignOut() {
     navigation("/");
     signOut();
   }
-
-  useEffect(() => {
-    async function fetchProperties() {
-      const response = await api.get(`/properties?name=${search}`);
-      setProperties(response.data);
-    }
-
-    fetchProperties();
-  }, [search]);
 
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 
@@ -48,14 +38,16 @@ export function Header() {
       </Profile>
 
       <Farm>
+
         <select
-          value={selectProperty}
-          onChange={e => setSelectProperty(e.target.value)}
+          value={selectedProperty}
+          onChange={event => setSelectedProperty(event.target.value)}
         >
           <option value="">Selecione a propriedade</option>
           {
             properties.map(property => (
-              <option value={property.id}>
+              <option key={property.id} value={property.id}
+              >
                 {property.name}
                 {/* <Note
                   key={String(property.id)}
@@ -66,7 +58,7 @@ export function Header() {
             ))
           }
         </select>
-        
+
       </Farm>
 
       <Logout onClick={handleSignOut}>

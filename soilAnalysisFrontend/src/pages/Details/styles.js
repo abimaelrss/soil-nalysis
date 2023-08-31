@@ -36,10 +36,6 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  > button:first-child {
-    align-self: start;
-  }
-
   > h1 {
     font-size: 36px;
     font-weight: 500;

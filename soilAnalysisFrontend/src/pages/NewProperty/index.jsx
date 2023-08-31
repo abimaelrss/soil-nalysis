@@ -78,11 +78,12 @@ export function NewProperty() {
 
             <Button
               title="Voltar"
-              color=""
+              color="back"
               onClick={handleBack}
             >
               <FiArrowLeft />
             </Button>
+
             <Button
               title="Salvar"
               color="save"
