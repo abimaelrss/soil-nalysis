@@ -21,6 +21,35 @@ export const Search = styled.div`
 
 export const Content = styled.div`
   grid-area: content;
-  padding: 0 34px;
+  padding: 0 14px;
   overflow-y: auto;
+
+  > main {
+    padding: 10px;
+    border-top: 3px solid green;
+    background-color: rgb(255, 255, 255);
+
+    table {
+      width: 100%;
+
+      margin: 40px 0;
+      text-align: center;
+
+      thead {
+        background: #F1F1F1;
+      }
+      
+      tbody tr:nth-child(even) {
+        background: #F9F9F9;
+      }
+      
+      tbody tr:nth-child(odd) {
+        background: #F1F1F1;
+      }
+      
+      tbody td {
+        padding-left: 20px;
+      }
+    }
+  }
 `;

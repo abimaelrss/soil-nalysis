@@ -24,10 +24,6 @@ export function Properties() {
 
   const navigate = useNavigate();
 
-  function handleBack() {
-    navigate(-1);
-  }
-
   function handleDetails(id) {
     navigate(`/details/${id}`);
   }

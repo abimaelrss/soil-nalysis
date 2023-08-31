@@ -41,7 +41,7 @@ export function Header() {
 
         <select
           value={selectedProperty}
-          onChange={event => setSelectedProperty(event.target.value)}
+          onChange={(event) => setSelectedProperty(event.target.value)}
         >
           <option value="">Selecione a propriedade</option>
           {

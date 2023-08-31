@@ -5,7 +5,6 @@ import { Routes } from './routes';
 import { ThemeProvider } from 'styled-components';
 
 import { AuthProvider } from './hooks/auth';
-import { PropertyProvider } from './hooks/propertyProvider';
 
 import GlobalStyle from './styles/global';
 
