@@ -2,8 +2,9 @@ const knex = require("../database/knex");
 
 class AreasController {
   async create(request, response) {
-    const { name, description, size, property_id, user_id } = request.body;
-    
+    const { name, description, size, property_id } = request.body;
+    const user_id = request.user.id;
+
     const [area_id] = await knex("areas").insert({
       name,
       description,
@@ -34,18 +35,12 @@ class AreasController {
   }
 
   async index(request, response) {
-    const { name } = request.query;
-
-    const property_id = request.user.id;
-    const user_id = request.user.id;
+    const property_id = request.body;
 
     let areas;
 
     areas = await knex("areas")
-      .where({ property_id })
-      .where({ user_id })
-      .whereLike("name", `%${name}%`)
-      .orderBy("name");
+      .where(property_id);
 
     return response.json(areas);
   }

@@ -5,8 +5,6 @@ class PropertiesController {
     const { name, size, areas } = request.body;
     const user_id = request.user.id;
 
-    console.log(user_id);
-
     const [property_id] = await knex("properties").insert({
       name,
       size,
