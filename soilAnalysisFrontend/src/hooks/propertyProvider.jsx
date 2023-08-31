@@ -9,16 +9,15 @@ function PropertyProvider({ children }) {
   const [properties, setProperties] = useState([]);
   const [selectedProperty, setSelectedProperty] = useState("");
 
-  const {token} = useAuth();
+  // const {token} = useAuth();
 
   useEffect(() => {
     async function searchProperty() {
 
       
       try {
-        // const token = localStorage.getItem("@soilanalysis:token");
+        const token = localStorage.getItem("@soilanalysis:token");
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        console.log(user);
 
         const response = await api.get("/properties");
         // const response = await api.get("/properties").where(`properties.user_id=${user.id}`);
@@ -32,10 +31,10 @@ function PropertyProvider({ children }) {
         }
       }
     }
-    console.log(token);
+    // console.log(token);
 
     searchProperty();
-  }, [token]);
+  }, []);
 
   return (
     <PropertyContext.Provider value={{
