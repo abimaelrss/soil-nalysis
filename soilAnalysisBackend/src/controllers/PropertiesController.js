@@ -35,27 +35,15 @@ class PropertiesController {
   }
 
   async index(request, response) {
-    const { name } = request.query;
     const user_id = request.user.id;
 
     let properties;
 
     properties = await knex("properties")
       .where({ user_id })
-      .whereLike("name", `%${name}%`)
       .orderBy("name");
 
-    const userTags = await knex("tags").where({ user_id });
-    
-    const notesWithTags = properties.map(property => {
-      const noteTags = userTags.filter(tag => tag.note_id === note.id);
-
-      return {
-        ...property,
-      }
-    });
-
-    return response.json(notesWithTags);
+    return response.json(properties);
   }
 }
 

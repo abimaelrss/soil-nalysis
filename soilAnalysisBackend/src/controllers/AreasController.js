@@ -2,12 +2,8 @@ const knex = require("../database/knex");
 
 class AreasController {
   async create(request, response) {
-    const { name, description, size } = request.body;
-    const user_id = request.user.id;
+    const { name, description, size, property_id, user_id } = request.body;
     
-    const  property_id = await knex("properties").select("properties.id")
-    .where("properties.user_id", user_id);
-
     const [area_id] = await knex("areas").insert({
       name,
       description,
