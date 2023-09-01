@@ -5,9 +5,11 @@ export const Container = styled.div`
 
   > header {
     width: 100%;
-    height: 144px;
+    height: 100px;
 
-    background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+    /* background: ${({ theme }) => theme.COLORS.BACKGROUND_900}; */
+    background-color: #2E8B57;
+
 
     display: flex;
     align-items: center;

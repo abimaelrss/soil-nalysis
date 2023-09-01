@@ -8,9 +8,13 @@ import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
 import { Container } from './styles';
 
 import { ButtonText } from '../ButtonText';
+import { useProperty } from '../../hooks/propertyProvider';
 
 export function Menu() {
   const { signOut, user } = useAuth();
+
+  const { properties, selectedProperty } = useProperty();
+
   const navigate = useNavigate();
 
   function handleSignOu() {
@@ -28,30 +32,43 @@ export function Menu() {
           onClick={() => navigate("/")}
         />
       </li>
-      <li>
-        <ButtonText
-          title="PROPRIEDADE"
-          onClick={() => navigate("/properties")}
-        />
-      </li>
-      <li>
-        <ButtonText
-          title="AREAS"
-          onClick={() => navigate("/areas")}
-        />
-      </li>
-      <li>
-        <ButtonText
-          title="ANALISES"
-          onClick={() => navigate("/analyzes")}
-        />
-      </li>
-      <li>
-        <ButtonText
-          title="REALATORIOS"
-          onClick={() => navigate("/reports")}
-        />
-      </li>
+
+      {
+        !selectedProperty && (
+          navigate("/")
+        )
+      }
+
+      {
+        selectedProperty && (
+          <>
+            <li>
+              <ButtonText
+                title="PROPRIEDADES"
+                onClick={() => navigate("/properties")}
+              />
+            </li>
+            <li>
+              <ButtonText
+                title="AREAS"
+                onClick={() => navigate("/areas")}
+              />
+            </li>
+            <li>
+              <ButtonText
+                title="ANALISES"
+                onClick={() => navigate("/analyzes")}
+              />
+            </li>
+            <li>
+              <ButtonText
+                title="REALATORIOS"
+                onClick={() => navigate("/reports")}
+              />
+            </li>
+          </>
+        )
+      }
 
     </Container>
   );

@@ -28,23 +28,23 @@ export function Properties() {
     navigate(`/details/${id}`);
   }
 
-  async function handleRemove() {
+  async function handleRemove(id) {
     const confirm = window.confirm("Deseja realmente remover a propriedade?");
 
     if (confirm) {
-      await api.delete(`/properties/${params.id}`);
-      navigate(-1);
+      await api.delete(`/properties/${id}`);
+      alert("Propriedade removida com sucesso!");
     }
   }
 
   useEffect(() => {
     async function fetchProperties() {
-      const response = await api.get(`/properties?name=${search}`);
+      const response = await api.get(`/properties`);
       setProperties(response.data);
     }
 
     fetchProperties();
-  }, [search]);
+  }, []);
 
   return (
     <Container>
@@ -89,7 +89,7 @@ export function Properties() {
                     </td>
                     <td>
                       <Button
-                        title="Aterar"
+                        title=""
                         color="alter"
                         onClick={() => handleDetails(property.id)}
                       >
@@ -97,7 +97,7 @@ export function Properties() {
                       </Button>
 
                       <Button
-                        title="Deletar"
+                        title=""
                         color="delete"
                         onClick={() => handleRemove(property.id)}
                       >

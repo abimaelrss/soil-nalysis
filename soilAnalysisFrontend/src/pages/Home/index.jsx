@@ -43,10 +43,16 @@ export function Home() {
 
       <Content>
         
-        <Article title="Demonstrativo da propriedade" >
+        <Article title="Total de propriedades" >
 
         </Article>
 
+        <Article title="Demonstrativo da propriedade" >
+
+        </Article>
+        <Article title="Demonstrativo da propriedade" >
+
+        </Article>
         <Article title="Demonstrativo da propriedade" >
 
         </Article>

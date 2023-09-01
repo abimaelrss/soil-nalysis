@@ -18,7 +18,6 @@ import { GrUpdate } from 'react-icons/gr';
 import { useProperty } from '../../hooks/propertyProvider';
 
 export function Areas() {
-  const [search, setSearch] = useState("");
   const [areas, setAreas] = useState([]);
 
   const { selectedProperty } = useProperty();
@@ -40,8 +39,7 @@ export function Areas() {
 
   useEffect(() => {
     async function fetchAreas() {
-      const response = await api.get(`/areas?id=${selectedProperty}`);
-
+      const response = await api.get(`/areas?property_id=${selectedProperty}`);
       setAreas(response.data);
     }
 

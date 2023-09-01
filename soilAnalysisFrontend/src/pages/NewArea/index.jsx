@@ -21,7 +21,7 @@ export function NewArea() {
   const [description, setDescription] = useState("");
   const [size, setSize] = useState("");
 
-  const {user} = useAuth();
+  const { user } = useAuth();
   const user_id = user.user_id;
 
   const { selectedProperty } = useProperty();
@@ -49,7 +49,7 @@ export function NewArea() {
       name,
       description,
       size,
-      property_id:selectedProperty,
+      property_id: selectedProperty,
       user_id
     });
 
