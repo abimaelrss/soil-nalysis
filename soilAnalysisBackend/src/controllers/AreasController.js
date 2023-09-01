@@ -21,9 +21,7 @@ class AreasController {
 
     const area = await knex("areas").where({ id }).first();
 
-    return response.json({
-      ...area
-    });
+    return response.json({ ...area });
   }
 
   async delete(request, response) {
@@ -35,12 +33,13 @@ class AreasController {
   }
 
   async index(request, response) {
-    const property_id = request.body;
+    const { property_id } = request.query;
 
     let areas;
 
     areas = await knex("areas")
-      .where(property_id);
+      .where({ property_id })
+      .orderBy("name");
 
     return response.json(areas);
   }
