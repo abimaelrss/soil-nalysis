@@ -23,7 +23,7 @@ export const Container = styled.button`
   align-items: center;
   justify-content: center;
 
-  width: 110px;
+  width: auto;
   height: 36px;
   border: 0;
   padding: 0 16px;

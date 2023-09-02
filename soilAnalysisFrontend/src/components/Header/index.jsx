@@ -1,36 +1,36 @@
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { RiShutDownLine } from 'react-icons/ri';
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { RiShutDownLine } from "react-icons/ri";
 
-import { useAuth } from '../../hooks/auth';
-import { useProperty } from '../../hooks/propertyProvider';
+import { useAuth } from "../../hooks/auth";
+import { useProperty } from "../../hooks/propertyProvider";
 
-import { api } from '../../services/api';
-import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
+import { api } from "../../services/api";
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 
-import { Container, Profile, Logout, Farm } from './styles';
-import { Note } from '../Note';
+import { Container, Profile, Logout, Farm } from "./styles";
+import { Note } from "../Note";
+import { Button } from "../Button";
 
 export function Header() {
   const { signOut, user } = useAuth();
   const { properties, selectedProperty, setSelectedProperty } = useProperty();
 
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   function handleSignOut() {
-    navigation("/");
+    navigate("/");
     signOut();
   }
 
-  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+  const avatarUrl = user.avatar
+    ? `${api.defaults.baseURL}/files/${user.avatar}`
+    : avatarPlaceholder;
 
   return (
     <Container>
       <Profile to="/profile">
-        <img
-          src={avatarUrl}
-          alt={user.name}
-        />
+        <img src={avatarUrl} alt={user.name} />
         <div>
           <span>Bem vindo</span>
           <strong>{user.name}</strong>
@@ -38,33 +38,41 @@ export function Header() {
       </Profile>
 
       <Farm>
-
-        <select
-          value={selectedProperty}
-          onChange={(event) => setSelectedProperty(event.target.value)}
-        >
-          <option value="">Selecione a propriedade</option>
-          {
-            properties.map(property => (
-              <option key={property.id} value={property.id}
+        {
+          // console.log(properties.length)
+          properties.length == 0 ? (
+            <Button
+              title="CADASTRAR PROPRIEDADE"
+              onClick={() => navigate("/newProperty")}
+            />
+          ) : (
+            properties.length != 0 && (
+              <select
+                value={selectedProperty}
+                onChange={(event) => setSelectedProperty(event.target.value)}
               >
-                {property.name}
-                {/* <Note
-                  key={String(property.id)}
-                  data={property}
-                  onClick={() => handleDetails(properties.id)}
-                /> */}
-              </option>
-            ))
-          }
-        </select>
+                <option value="">Selecione a propriedade</option>
+                {properties.map((property) => (
+                  <option key={property.id} value={property.id}>
+                    {property.name}
+                    {/* <Note
+                    key={String(property.id)}
+                    data={property}
+                    onClick={() => handleDetails(properties.id)}
+                  /> */}
+                  </option>
+                ))}
+              </select>
+            )
+          )
+        }
 
+        {}
       </Farm>
 
       <Logout onClick={handleSignOut}>
         <RiShutDownLine />
       </Logout>
-
     </Container>
   );
 }

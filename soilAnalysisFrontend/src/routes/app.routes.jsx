@@ -9,8 +9,8 @@ import { Properties } from "../pages/Properties";
 import { NewProperty } from "../pages/NewProperty";
 import { Areas } from "../pages/Areas";
 import { NewArea } from "../pages/NewArea";
-import { Analyzes } from "../pages/Analyzes";
-import { NewAnalysis } from "../pages/NewAnalysis";
+import { Analysis } from "../pages/Analysis";
+import { NewAnalyze } from "../pages/NewAnalyze";
 import { Reports } from "../pages/Reports";
 import { NewReport } from "../pages/NewReport";
 import { Notes } from "../pages/Notes";
@@ -28,8 +28,8 @@ export function AppRoutes() {
       <Route path="/newProperty" element={<NewProperty />} />
       <Route path="/areas" element={<Areas />} />
       <Route path="/newArea" element={<NewArea />} />
-      <Route path="/analyzes" element={<Analyzes />} />
-      <Route path="/newAnalysis" element={<NewAnalysis />} />
+      <Route path="/analysis" element={<Analysis />} />
+      <Route path="/newAnalyze" element={<NewAnalyze />} />
       <Route path="/reports" element={<Reports />} />
       <Route path="/newReport" element={<NewReport />} />
     </Routes>

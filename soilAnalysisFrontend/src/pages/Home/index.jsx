@@ -25,7 +25,8 @@ export function Home() {
 
   useEffect(() => {
     async function fetchProperties() {
-      const response = await api.get(`/properties?name=${search}`);
+      // const response = await api.get(`/properties?name=${search}`);
+      const response = await api.get("/properties");
       setProperties(response.data);
     }
 
@@ -42,18 +43,18 @@ export function Home() {
       <Menu />
 
       <Content>
-        
+
         <Article title="Total de propriedades" >
+          {
+            properties.length
+          }
+        </Article>
+
+        <Article title="Total de áreas" >
 
         </Article>
 
-        <Article title="Demonstrativo da propriedade" >
-
-        </Article>
-        <Article title="Demonstrativo da propriedade" >
-
-        </Article>
-        <Article title="Demonstrativo da propriedade" >
+        <Article title="Total de análises" >
 
         </Article>
 

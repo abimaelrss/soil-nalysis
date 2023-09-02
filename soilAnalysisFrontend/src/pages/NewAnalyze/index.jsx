@@ -15,15 +15,13 @@ import { Container, Content, Form } from './styles';
 import { Menu } from '../../components/Menu';
 import { Brand } from '../../components/Brand';
 
-export function NewAnalysis() {
+export function NewAnalyze() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  const [links, setLinks] = useState([]);
-  const [newLink, setNewLink] = useState("");
-
-  const [tags, setTags] = useState([]);
-  const [newTag, setNewTag] = useState("");
+  const [depth, setDepth] = useState("");
+  const [smp, setSmp] = useState("");
+  const [cacl, setCacl] = useState("");
+  const [h2o, setH2o] = useState("");
 
   const navigate = useNavigate();
 
@@ -31,45 +29,16 @@ export function NewAnalysis() {
     navigate(-1);
   }
 
-  function handleAddLink() {
-    setLinks(prevState => [...prevState, newLink]);
-    setNewLink("");
-  }
-
-  function handleRemoveLink(deleted) {
-    setLinks(prevState => prevState.filter(link => link !== deleted));
-  }
-
-  function handleAddTag() {
-    setTags(prevState => [...prevState, newTag]);
-    setNewTag("");
-
-  }
-  function handleRemoveTag(deleted) {
-    setTags(prevState => prevState.filter(tag => tag !== deleted));
-  }
-
-  async function handleNewAnalysis() {
-    if (!title) {
+  async function handleNewAnalyze() {
+    if (!description) {
       return alert("Digite o título da nota!");
     }
-
-    if (newLink) {
-      return alert("Você deixou um link no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio!");
-    }
-
-    if (newTag) {
-      return alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio!");
-    }
-
-    await api.post("/notes", {
+    await api.post("/analysis", {
       title,
-      description,
-      tags,
-      links
+      description
     });
 
-    alert("Nota criada com sucesso!");
+    alert("Análise criada com sucesso!");
     navigate(-1);
   }
 
@@ -95,33 +64,33 @@ export function NewAnalysis() {
             <Section title="Sobre">
               <Input
                 placeholder="Descrição"
-                onChange={e => setTitle(e.target.value)}
+                onChange={e => setDescription(e.target.value)}
               />
 
               <Input
                 placeholder="Profundidade"
-                onChange={e => setTitle(e.target.value)}
+                onChange={e => setDepth(e.target.value)}
               />
             </Section>
 
             <Section title="pH">
               <Input
                 placeholder="SMP"
-                onChange={e => setTitle(e.target.value)}
+                onChange={e => setSmp(e.target.value)}
               />
 
               <Input
                 placeholder="CaCl2"
-                onChange={e => setTitle(e.target.value)}
+                onChange={e => setCacl(e.target.value)}
               />
 
               <Input
                 placeholder="H2O"
-                onChange={e => setTitle(e.target.value)}
+                onChange={e => setH2o(e.target.value)}
               />
             </Section>
 
-            <Section title="cmolc . dm -³">
+            {/* <Section title="cmolc . dm -³">
               <Input
                 placeholder="Ca+Mg"
                 onChange={e => setTitle(e.target.value)}
@@ -302,7 +271,7 @@ export function NewAnalysis() {
                 placeholder="Mg/K"
                 onChange={e => setTitle(e.target.value)}
               />
-            </Section>
+            </Section> */}
 
           </div>
 
@@ -319,7 +288,7 @@ export function NewAnalysis() {
             <Button
               title="Salvar"
               color="save"
-              onClick={handleNewAnalysis}
+              onClick={handleNewAnalyze}
             >
               <FiPlus />
             </Button>

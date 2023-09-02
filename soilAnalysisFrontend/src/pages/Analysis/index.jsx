@@ -15,8 +15,8 @@ import { Button } from '../../components/Button';
 import { Navigation } from '../../components/Navigation';
 import { useProperty } from '../../hooks/propertyProvider';
 
-export function Areas() {
-  const [areas, setAreas] = useState([]);
+export function Analysis() {
+  const [analysis, setAnalysis] = useState([]);
 
   const { selectedProperty } = useProperty();
 
@@ -27,21 +27,21 @@ export function Areas() {
   }
 
   async function handleRemove() {
-    const confirm = window.confirm("Deseja realmente remover a area?");
+    const confirm = window.confirm("Deseja realmente remover a análise?");
 
     if (confirm) {
-      await api.delete(`/areas/${params.id}`);
+      await api.delete(`/analysis/${params.id}`);
       navigate(-1);
     }
   }
 
   useEffect(() => {
-    async function fetchAreas() {
-      const response = await api.get(`/areas?property_id=${selectedProperty}`);
+    async function fetchAnalysis() {
+      const response = await api.get(`/analysis?property_id=${selectedProperty}`);
       setAreas(response.data);
     }
 
-    fetchAreas();
+    fetchAnalysis();
   }, [selectedProperty]);
 
   return (
@@ -64,18 +64,18 @@ export function Areas() {
       <Content>
 
         <Navigation title="Análises">
-          Selecione a área
+          Selecione a análise
         </Navigation>
 
         <main>
           {
-            areas.length == 0 && (
-              <p>Não existem áreas cadastradas para essa propriedade!</p>
+            analysis.length == 0 && (
+              <p>Não existem análises cadastradas!</p>
             )
           }
 
           {
-            areas.length != 0 && (
+            analysis.length != 0 && (
               <table>
                 <thead>
                   <tr>
@@ -86,19 +86,19 @@ export function Areas() {
                 </thead>
                 <tbody>
                   {
-                    areas.map(area => (
-                      <tr key={area.id}>
+                    analysis.map(analyze => (
+                      <tr key={analyze.id}>
                         <td>
-                          {area.name}
+                          {analyze.description}
                         </td>
                         <td>
-                          {area.size}
+                          {analyze.depth}
                         </td>
                         <td>
                           <Button
                             title=""
                             color="alter"
-                            onClick={() => handleDetails(area.id)}
+                            onClick={() => handleDetails(analyze.id)}
                           >
                             <GrUpdate />
                           </Button>
@@ -106,7 +106,7 @@ export function Areas() {
                           <Button
                             title=""
                             color="delete"
-                            onClick={() => handleRemove(area.id)}
+                            onClick={() => handleRemove(analyze.id)}
                           >
                             <FiDelete />
 
@@ -135,7 +135,7 @@ export function Areas() {
 
       </Content>
 
-      <New to="/newArea" />
+      <New to="/newAnalyze" />
 
     </Container>
   );

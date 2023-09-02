@@ -11,9 +11,9 @@ export function Navigation({ title, children }) {
       </div>
 
       <div>
-        <h3>Selecione a propriedade</h3>
+        <h3>{children}</h3>
       </div>
-      {children}
+      
     </Container>
   );
 }

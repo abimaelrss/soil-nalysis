@@ -65,7 +65,9 @@ export function Properties() {
 
       <Content>
 
-        <Navigation title="Propriedades" />
+        <Navigation title="Análises">
+          Selecione a propriedade
+        </Navigation>
 
         <main>
 

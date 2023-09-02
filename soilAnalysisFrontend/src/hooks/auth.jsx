@@ -31,6 +31,7 @@ function AuthProvider({ children }) {
   function signOut() {
     localStorage.removeItem("@soilanalysis:user");
     localStorage.removeItem("@soilanalysis:token");
+    localStorage.removeItem("@soilanalysis:saveSelected");
 
     setData({});
   }
