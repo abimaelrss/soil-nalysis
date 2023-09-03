@@ -1,26 +1,26 @@
-import { useState } from 'react';
-import { FiPlus, FiArrowLeft } from 'react-icons/fi';
+import { useEffect, useState } from "react";
+import { FiPlus, FiArrowLeft, FiDelete } from "react-icons/fi";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import { Header } from '../../components/Header';
-import { Input } from '../../components/Input';
-import { TextArea } from '../../components/TextArea';
-import { NoteItem } from '../../components/NoteItem';
-import { Section } from '../../components/Section';
-import { Button } from '../../components/Button';
-import { ButtonText } from '../../components/ButtonText';
+import { Header } from "../../components/Header";
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 
-import { api } from '../../services/api';
+import { api } from "../../services/api";
 
-import { Container, Content, Form } from './styles';
-import { Brand } from '../../components/Brand';
-import { Menu } from '../../components/Menu';
-import { Baseboard } from '../../components/Baseboard';
+import { Container, Content, Form } from "./styles";
+import { Brand } from "../../components/Brand";
+import { Menu } from "../../components/Menu";
+import { useProperty } from "../../hooks/propertyProvider";
 
 export function NewProperty() {
+  const { properties, searchProperty } = useProperty();
+
   const [name, setName] = useState("");
   const [size, setSize] = useState("");
+
+  const params = useParams();
 
   const navigate = useNavigate();
 
@@ -28,7 +28,9 @@ export function NewProperty() {
     navigate(-1);
   }
 
-  async function handleNewProperty() {
+  async function handleNew() {
+    console.log("new");
+
     if (!name) {
       return alert("Digite o nome da propreidade!");
     }
@@ -39,65 +41,79 @@ export function NewProperty() {
 
     await api.post("/properties", {
       name,
-      size
+      size,
     });
 
     alert("Propriedade criada com sucesso!");
+    searchProperty();
     navigate(-1);
   }
 
+  async function handleUpdate() {
+    const property_updated = {
+      name,
+      size,
+    };
+
+    try {
+      await api.put(`/properties/${params.id}`, property_updated);
+      alert("Propriedade atualizada com sucesso!");
+      searchProperty();
+      navigate(-1);
+    } catch (error) {
+      alert("Erro ao atualizar propriedade!");
+    }
+  }
+
+  useEffect(() => {
+    async function findProperties() {
+      const property = properties.find((prop) => prop.id === Number(params.id));
+      setName(property.name);
+      setSize(property.size);
+    }
+    params.id && findProperties();
+  }, [params.id]);
+
   return (
     <Container>
-
       <Brand />
 
       <Header />
 
       <Menu />
-
       <Content>
-
         <Form>
           <h1>Cadastrar propriedade</h1>
-          <ButtonText
-            title="Voltar"
-            onClick={handleBack}
-          />
 
           <Input
             placeholder="Nome"
-            onChange={e => setName(e.target.value)}
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
 
           <Input
             placeholder="Tamanho (em hectare)"
-            onChange={e => setSize(e.target.value)}
+            type="text"
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
           />
 
           <div className="baseboard">
-
-            <Button
-              title="Voltar"
-              color="back"
-              onClick={handleBack}
-            >
+            <Button title="Voltar" color="back" onClick={handleBack}>
               <FiArrowLeft />
             </Button>
 
             <Button
               title="Salvar"
               color="save"
-              onClick={handleNewProperty}
+              onClick={params.id ? handleUpdate : handleNew}
             >
               <FiPlus />
             </Button>
-
           </div>
-
         </Form>
-
       </Content>
-
     </Container>
   );
 }

@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FiPlus, FiSearch, FiArrowLeft, FiDelete } from 'react-icons/fi';
-import { GrUpdate } from 'react-icons/gr';
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FiPlus, FiSearch, FiArrowLeft, FiDelete } from "react-icons/fi";
+import { GrUpdate } from "react-icons/gr";
 
-import { api } from '../../services/api';
+import { api } from "../../services/api";
 
-import { Container, Content, Search } from './styles';
+import { Container, Content, Search } from "./styles";
 
-import { Brand } from '../../components/Brand';
-import { Header } from '../../components/Header';
-import { Menu } from '../../components/Menu';
-import { New } from '../../components/New';
-import { Input } from '../../components/Input';
-import { Section } from '../../components/Section';
-import { Note } from '../../components/Note';
-import { Navigation } from '../../components/Navigation';
-import { Baseboard } from '../../components/Baseboard';
-import { Button } from '../../components/Button';
+import { Brand } from "../../components/Brand";
+import { Header } from "../../components/Header";
+import { Menu } from "../../components/Menu";
+import { New } from "../../components/New";
+import { Input } from "../../components/Input";
+import { Section } from "../../components/Section";
+import { Note } from "../../components/Note";
+import { Navigation } from "../../components/Navigation";
+import { Baseboard } from "../../components/Baseboard";
+import { Button } from "../../components/Button";
 
 export function Properties() {
   const [search, setSearch] = useState("");
@@ -24,8 +24,13 @@ export function Properties() {
 
   const navigate = useNavigate();
 
-  function handleDetails(id) {
-    navigate(`/details/${id}`);
+  function handleUpdate(id) {
+    navigate(`/newProperty/${id}`);
+  }
+
+  async function fetchProperties() {
+    const response = await api.get(`/properties`);
+    setProperties(response.data);
   }
 
   async function handleRemove(id) {
@@ -34,21 +39,16 @@ export function Properties() {
     if (confirm) {
       await api.delete(`/properties/${id}`);
       alert("Propriedade removida com sucesso!");
+      fetchProperties();
     }
   }
 
   useEffect(() => {
-    async function fetchProperties() {
-      const response = await api.get(`/properties`);
-      setProperties(response.data);
-    }
-
     fetchProperties();
   }, []);
 
   return (
     <Container>
-
       <Brand />
 
       <Header />
@@ -64,13 +64,9 @@ export function Properties() {
       </Search> */}
 
       <Content>
-
-        <Navigation title="Análises">
-          Selecione a propriedade
-        </Navigation>
+        <Navigation title="Propriedades">Selecione a propriedade</Navigation>
 
         <main>
-
           <table>
             <thead>
               <tr>
@@ -80,36 +76,29 @@ export function Properties() {
               </tr>
             </thead>
             <tbody>
-              {
-                properties.map(property => (
-                  <tr key={property.id}>
-                    <td>
-                      {property.name}
-                    </td>
-                    <td>
-                      {property.size}
-                    </td>
-                    <td>
-                      <Button
-                        title=""
-                        color="alter"
-                        onClick={() => handleDetails(property.id)}
-                      >
-                        <GrUpdate />
-                      </Button>
+              {properties.map((property) => (
+                <tr key={property.id}>
+                  <td>{property.name}</td>
+                  <td>{property.size}</td>
+                  <td>
+                    <Button
+                      title=""
+                      color="alter"
+                      onClick={() => handleUpdate(property.id)}
+                    >
+                      <GrUpdate />
+                    </Button>
 
-                      <Button
-                        title=""
-                        color="delete"
-                        onClick={() => handleRemove(property.id)}
-                      >
-                        <FiDelete />
-
-                      </Button>
-                    </td>
-                  </tr>
-                ))
-              }
+                    <Button
+                      title=""
+                      color="delete"
+                      onClick={() => handleRemove(property.id)}
+                    >
+                      <FiDelete />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
 
@@ -124,13 +113,10 @@ export function Properties() {
               ))
             }
           </Section> */}
-
         </main>
-
       </Content>
 
       <New to="/newProperty" />
-
     </Container>
   );
 }

@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 
-import { api } from '../services/api';
+import { api } from "../services/api";
 
 export const AuthContext = createContext({});
 
@@ -8,7 +8,6 @@ function AuthProvider({ children }) {
   const [data, setData] = useState({});
 
   async function signIn({ email, password }) {
-
     try {
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
@@ -16,14 +15,13 @@ function AuthProvider({ children }) {
       localStorage.setItem("@soilanalysis:user", JSON.stringify(user));
       localStorage.setItem("@soilanalysis:token", token);
 
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setData({ user, token });
-
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
       } else {
-        alert("Não foi possível entrar!")
+        alert("Não foi possível entrar!");
       }
     }
   }
@@ -38,7 +36,6 @@ function AuthProvider({ children }) {
 
   async function updateProfile({ user, avatarFile }) {
     try {
-
       if (avatarFile) {
         const fileUploadForm = new FormData();
         fileUploadForm.append("avatar", avatarFile);
@@ -48,10 +45,7 @@ function AuthProvider({ children }) {
       }
 
       await api.put("/users", user);
-      console.log(user);
       localStorage.setItem("@soilanalysis:user", JSON.stringify(user));
-
-      
 
       setData({ user, token: data.token });
       localStorage.setItem("@soilanalysis:user", JSON.stringify(user));
@@ -59,7 +53,6 @@ function AuthProvider({ children }) {
       setData({ user, token: data.token });
 
       alert("Perfil atualizado!");
-
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
@@ -74,27 +67,28 @@ function AuthProvider({ children }) {
     const token = localStorage.getItem("@soilanalysis:token");
 
     if (user && token) {
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       setData({
         token,
-        user: JSON.parse(user)
+        user: JSON.parse(user),
       });
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{
-      signIn,
-      signOut,
-      updateProfile,
-      user: data.user,
-      token: data.token
-    }}
+    <AuthContext.Provider
+      value={{
+        signIn,
+        signOut,
+        updateProfile,
+        user: data.user,
+        token: data.token,
+      }}
     >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 function useAuth() {
@@ -103,4 +97,4 @@ function useAuth() {
   return context;
 }
 
-export { AuthProvider, useAuth }
+export { AuthProvider, useAuth };

@@ -25,9 +25,13 @@ export function AppRoutes() {
       <Route path="/details/:id" element={<Details />} />
       
       <Route path="/properties" element={<Properties />} />
+      <Route path="/properties/:id" element={<NewProperty />} />
       <Route path="/newProperty" element={<NewProperty />} />
+      <Route path="/newProperty/:id" element={<NewProperty />} />
       <Route path="/areas" element={<Areas />} />
+      <Route path="/areas/:id" element={<Areas />} />
       <Route path="/newArea" element={<NewArea />} />
+      <Route path="/newArea/:id" element={<NewArea />} />
       <Route path="/analysis" element={<Analysis />} />
       <Route path="/newAnalyze" element={<NewAnalyze />} />
       <Route path="/reports" element={<Reports />} />
