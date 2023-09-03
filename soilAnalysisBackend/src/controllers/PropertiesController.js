@@ -2,14 +2,37 @@ const knex = require("../database/knex");
 
 class PropertiesController {
   async create(request, response) {
-    const { name, size, areas } = request.body;
+    const { name, size } = request.body;
     const user_id = request.user.id;
 
     const [property_id] = await knex("properties").insert({
       name,
       size,
-      user_id
+      user_id,
     });
+
+    return response.json();
+  }
+
+  async uptade(request, response) {
+    const { name, size } = request.body;
+
+    const id = request.params.id;
+
+    const property = await knex("properties").where({ id });
+
+    console.log(property);
+
+    if (!property) {
+      throw new AppError("Propriedade não encontrada!");
+    }
+
+    property.name = name;
+    property.size = size;
+
+    console.log(name);
+
+    await knex("properties").where({ id }).update({ name: name, size: size });
 
     return response.json();
   }
@@ -20,7 +43,7 @@ class PropertiesController {
     const property = await knex("properties").where({ id }).first();
 
     return response.json({
-      ...property
+      ...property,
     });
   }
 
@@ -37,9 +60,7 @@ class PropertiesController {
 
     let properties;
 
-    properties = await knex("properties")
-      .where({ user_id })
-      .orderBy("name");
+    properties = await knex("properties").where({ user_id }).orderBy("name");
 
     return response.json(properties);
   }

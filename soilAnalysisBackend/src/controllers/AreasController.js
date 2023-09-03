@@ -10,8 +10,30 @@ class AreasController {
       description,
       size,
       property_id,
-      user_id
+      user_id,
     });
+
+    return response.json();
+  }
+
+  async update(request, response) {
+    const { name, description, size } = request.body;
+
+    const id = request.params.id;
+
+    const area = await knex("areas").where({ id });
+
+    if (!area) {
+      throw new AppError("Área não encontrada!");
+    }
+
+    area.name = name;
+    area.description = description;
+    area.size = size;
+
+    await knex("areas")
+      .where({ id })
+      .update({ name: name, description: description, size: size });
 
     return response.json();
   }
@@ -37,9 +59,7 @@ class AreasController {
 
     let areas;
 
-    areas = await knex("areas")
-      .where({ property_id })
-      .orderBy("name");
+    areas = await knex("areas").where({ property_id }).orderBy("name");
 
     return response.json(areas);
   }

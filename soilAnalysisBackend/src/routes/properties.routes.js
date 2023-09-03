@@ -10,6 +10,7 @@ const propertiesController = new PropertiesController();
 propertiesRouter.use(ensureAuthenticated);
 
 propertiesRouter.post("/", propertiesController.create);
+propertiesRouter.put("/:id", propertiesController.uptade);
 propertiesRouter.get("/:id", propertiesController.show);
 propertiesRouter.delete("/:id", propertiesController.delete);
 propertiesRouter.get("/", propertiesController.index);

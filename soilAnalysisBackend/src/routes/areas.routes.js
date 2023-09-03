@@ -10,6 +10,7 @@ const areasController = new AreasController();
 areasRouter.use(ensureAuthenticated);
 
 areasRouter.post("/", areasController.create);
+areasRouter.put("/:id", areasController.update);
 areasRouter.get("/:id", areasController.show);
 areasRouter.delete("/:id", areasController.delete);
 areasRouter.get("/", areasController.index);
