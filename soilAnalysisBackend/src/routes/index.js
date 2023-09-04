@@ -7,6 +7,7 @@ const sessionsRouter = require("./sessions.routes");
 
 const propertiesRouter = require("./properties.routes");
 const areasRouter = require("./areas.routes");
+const analysisRouter = require("./analysis.routes");
 
 
 const routes = Router();
@@ -17,6 +18,7 @@ routes.use("/tags", tagsRouter);
 
 routes.use("/properties", propertiesRouter);
 routes.use("/areas", areasRouter);
+routes.use("/analysis", analysisRouter);
 
 
 module.exports = routes;
