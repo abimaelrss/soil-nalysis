@@ -11,7 +11,7 @@ export const Container = styled.div`
   "brand header"
   "menu search"
   "menu content"
-  "menu content";
+  "menu footer";
 `;
 
 export const Search = styled.div`

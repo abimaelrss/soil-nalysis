@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { FiDelete } from "react-icons/fi";
+import { FiDelete, FiPlus } from "react-icons/fi";
 import { GrUpdate } from "react-icons/gr";
 
 import { api } from "../../services/api";
@@ -72,7 +72,15 @@ export function Analysis() {
       </Search> */}
 
       <Content>
-        <Navigation title="Análises">Selecione a análise</Navigation>
+        <Navigation title="Análises">
+          <Button
+            title="Cadastrar"
+            color="save"
+            onClick={() => navigate("/analyze")}
+          >
+            <FiPlus />
+          </Button>
+        </Navigation>
 
         <main>
           <select
@@ -97,7 +105,7 @@ export function Analysis() {
             <table>
               <thead>
                 <tr>
-                  <th>Nome</th>
+                  <th>Descrição</th>
                   <th>Tamanho</th>
                   <th>Ações</th>
                 </tr>
@@ -143,8 +151,6 @@ export function Analysis() {
           }
         </Section> */}
       </Content>
-
-      <New to="/analyze" />
     </Container>
   );
 }

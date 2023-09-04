@@ -39,12 +39,6 @@ export function Menu() {
               onClick={() => navigate("/analysis")}
             />
           </li>
-          <li>
-            <ButtonText
-              title="REALATORIOS"
-              onClick={() => navigate("/reports")}
-            />
-          </li>
         </>
       )}
     </Container>

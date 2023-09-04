@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiDelete } from "react-icons/fi";
+import { FiDelete, FiPlus } from "react-icons/fi";
 import { GrUpdate } from "react-icons/gr";
 
 import { api } from "../../services/api";
@@ -62,7 +62,15 @@ export function Areas() {
       </Search> */}
 
       <Content>
-        <Navigation title="Áreas">Selecione a área</Navigation>
+        <Navigation title="Áreas">
+          <Button
+            title="Cadastrar"
+            color="save"
+            onClick={() => navigate("/area")}
+          >
+            <FiPlus />
+          </Button>
+        </Navigation>
 
         <main>
           {areas.length == 0 && (
@@ -119,8 +127,6 @@ export function Areas() {
           }
         </Section> */}
       </Content>
-
-      <New to="/area" />
     </Container>
   );
 }

@@ -64,7 +64,15 @@ export function Properties() {
       </Search> */}
 
       <Content>
-        <Navigation title="Propriedades">Selecione a propriedade</Navigation>
+        <Navigation title="Propriedades">
+          <Button
+            title="Cadastrar"
+            color="save"
+            onClick={() => navigate("/property")}
+          >
+            <FiPlus />
+          </Button>
+        </Navigation>
 
         <main>
           <table>
@@ -115,8 +123,6 @@ export function Properties() {
           </Section> */}
         </main>
       </Content>
-
-      <New to="/property" />
     </Container>
   );
 }
