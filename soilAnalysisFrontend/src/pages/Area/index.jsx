@@ -1,26 +1,32 @@
-import { useEffect, useState } from "react";
-import { FiPlus, FiArrowLeft, FiDelete } from "react-icons/fi";
+import { FiArrowLeft, FiPlus, FiDelete } from "react-icons/fi";
 
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { ButtonText } from "../../components/ButtonText";
 
 import { api } from "../../services/api";
 
 import { Container, Content, Form } from "./styles";
 import { Brand } from "../../components/Brand";
 import { Menu } from "../../components/Menu";
-import { useProperty } from "../../hooks/propertyProvider";
+import { PropertyProvider, useProperty } from "../../hooks/propertyProvider";
+import { useAuth } from "../../hooks/auth";
 
-export function NewProperty() {
-  const { properties, searchProperty } = useProperty();
-
+export function Area() {
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [size, setSize] = useState("");
 
   const params = useParams();
+
+  const { user } = useAuth();
+  const user_id = user.user_id;
+
+  const { selectedProperty } = useProperty();
 
   const navigate = useNavigate();
 
@@ -29,50 +35,56 @@ export function NewProperty() {
   }
 
   async function handleNew() {
-    console.log("new");
-
     if (!name) {
-      return alert("Digite o nome da propreidade!");
+      return alert("Digite nome da área!");
+    }
+
+    if (!description) {
+      return alert("Digite a descrição da área!");
     }
 
     if (!size) {
-      return alert("Digite o tamanho da propreidade!");
+      return alert("Digite o tamanho da área!");
     }
 
-    await api.post("/properties", {
+    await api.post("/areas", {
       name,
+      description,
       size,
+      property_id: selectedProperty,
+      user_id,
     });
 
-    alert("Propriedade criada com sucesso!");
-    searchProperty();
+    alert("Área criada com sucesso!");
     navigate(-1);
   }
 
   async function handleUpdate() {
-    const property_updated = {
+    const area_updated = {
       name,
+      description,
       size,
     };
 
     try {
-      await api.put(`/properties/${params.id}`, property_updated);
-      alert("Propriedade atualizada com sucesso!");
-      searchProperty();
+      await api.put(`/areas/${params.id}`, area_updated);
+      alert("Área atualizada com sucesso!");
       navigate(-1);
     } catch (error) {
-      alert("Erro ao atualizar propriedade!");
+      alert("Erro ao atualizar área!");
     }
   }
 
   useEffect(() => {
-    async function findProperties() {
-      const property = properties.find((prop) => prop.id === Number(params.id));
-      setName(property.name);
-      setSize(property.size);
+    async function fetchArea() {
+      const response = await api.get(`/areas/${params.id}`);
+      setName(response.data.name);
+      setDescription(response.data.description);
+      setSize(response.data.size);
     }
-    params.id && findProperties();
-  }, [params.id]);
+
+    fetchArea();
+  }, []);
 
   return (
     <Container>
@@ -81,15 +93,24 @@ export function NewProperty() {
       <Header />
 
       <Menu />
+
       <Content>
         <Form>
-          <h1>Cadastrar propriedade</h1>
+          <h1>Cadastrar áreas</h1>
+          <ButtonText title="Voltar" onClick={handleBack} />
 
           <Input
             placeholder="Nome"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+          />
+
+          <Input
+            placeholder="Descrição"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
 
           <Input
@@ -100,7 +121,7 @@ export function NewProperty() {
           />
 
           <div className="baseboard">
-            <Button title="Voltar" color="back" onClick={handleBack}>
+            <Button title="Voltar" color="" onClick={handleBack}>
               <FiArrowLeft />
             </Button>
 

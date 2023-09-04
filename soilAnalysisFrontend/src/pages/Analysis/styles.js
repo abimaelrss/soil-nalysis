@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -7,11 +7,11 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 230px auto;
   grid-template-rows: 50px 50px auto 64px;
-  grid-template-areas: 
-  "brand header"
-  "menu content"
-  "menu content"
-  "new content";  
+  grid-template-areas:
+    "brand header"
+    "menu content"
+    "menu content"
+    "new content";
 `;
 
 export const Search = styled.div`
@@ -29,6 +29,14 @@ export const Content = styled.div`
     border-top: 3px solid green;
     background-color: rgb(255, 255, 255);
 
+    select {
+      font-size: 16px;
+      padding: 5px;
+      width: 200px;
+
+      border-radius: 5px;
+    }
+
     table {
       width: 100%;
 
@@ -36,17 +44,17 @@ export const Content = styled.div`
       text-align: center;
 
       thead {
-        background: #F1F1F1;
+        background: #f1f1f1;
       }
-      
+
       tbody tr:nth-child(even) {
-        background: #F9F9F9;
+        background: #f9f9f9;
       }
-      
+
       tbody tr:nth-child(odd) {
-        background: #F1F1F1;
+        background: #f1f1f1;
       }
-      
+
       tbody td {
         padding-left: 20px;
       }

@@ -1,52 +1,62 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FiDelete } from 'react-icons/fi';
-import { GrUpdate } from 'react-icons/gr';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { FiDelete } from "react-icons/fi";
+import { GrUpdate } from "react-icons/gr";
 
-import { api } from '../../services/api';
+import { api } from "../../services/api";
 
-import { Container, Content, Search } from './styles';
+import { Container, Content, Search } from "./styles";
 
-import { Brand } from '../../components/Brand';
-import { Header } from '../../components/Header';
-import { Menu } from '../../components/Menu';
-import { New } from '../../components/New';
-import { Button } from '../../components/Button';
-import { Navigation } from '../../components/Navigation';
-import { useProperty } from '../../hooks/propertyProvider';
+import { Brand } from "../../components/Brand";
+import { Header } from "../../components/Header";
+import { Menu } from "../../components/Menu";
+import { New } from "../../components/New";
+import { Button } from "../../components/Button";
+import { Navigation } from "../../components/Navigation";
+import { useProperty } from "../../hooks/propertyProvider";
 
 export function Analysis() {
   const [analysis, setAnalysis] = useState([]);
+  const [areas, setAreas] = useState([]);
+  const [selectedArea, setSelectedArea] = useState();
+
+  const params = useParams();
 
   const { selectedProperty } = useProperty();
 
   const navigate = useNavigate();
 
-  function handleDetails(id) {
-    navigate(`/details/${id}`);
+  function handleUpdate(analyze_id) {
+    navigate(`/analyze/${analyze_id}`);
   }
 
-  async function handleRemove() {
+  async function fetchAnalysis() {
+    const response = await api.get(`/analysis?area_id=${selectedArea}`);
+    setAnalysis(response.data);
+  }
+
+  async function fetchAreas() {
+    const response = await api.get(`/areas?property_id=${selectedProperty}`);
+    setAreas(response.data);
+  }
+
+  async function handleRemove(analyze_id) {
     const confirm = window.confirm("Deseja realmente remover a análise?");
 
     if (confirm) {
-      await api.delete(`/analysis/${params.id}`);
-      navigate(-1);
+      await api.delete(`/analysis/${analyze_id}`);
+      alert("Análise removida com sucesso!");
+      fetchAnalysis();
     }
   }
 
   useEffect(() => {
-    async function fetchAnalysis() {
-      const response = await api.get(`/analysis?property_id=${selectedProperty}`);
-      setAreas(response.data);
-    }
-
     fetchAnalysis();
-  }, [selectedProperty]);
+    fetchAreas();
+  }, [selectedArea]);
 
   return (
     <Container>
-
       <Brand />
 
       <Header />
@@ -62,63 +72,63 @@ export function Analysis() {
       </Search> */}
 
       <Content>
-
-        <Navigation title="Análises">
-          Selecione a análise
-        </Navigation>
+        <Navigation title="Análises">Selecione a análise</Navigation>
 
         <main>
-          {
-            analysis.length == 0 && (
-              <p>Não existem análises cadastradas!</p>
-            )
-          }
+          <select
+            value={selectedArea}
+            onChange={(event) => setSelectedArea(event.target.value)}
+          >
+            <option value="">Selecione a área</option>
+            {areas.map((area) => (
+              <option key={area.id} value={area.id}>
+                {area.name}
+                {/* <Note
+                    key={String(property.id)}
+                    data={property}
+                    onClick={() => handleDetails(properties.id)}
+                  /> */}
+              </option>
+            ))}
+          </select>
+          {/* {analysis.length == 0 && <p>Não existem análises cadastradas!</p>} */}
 
-          {
-            analysis.length != 0 && (
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Tamanho</th>
-                    <th>Ações</th>
+          {analysis.length != 0 && (
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Tamanho</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {analysis.map((analyze) => (
+                  <tr key={analyze.id}>
+                    <td>{analyze.description}</td>
+                    <td>{analyze.depth}</td>
+                    <td>
+                      <Button
+                        title=""
+                        color="alter"
+                        onClick={() => handleUpdate(analyze.id)}
+                      >
+                        <GrUpdate />
+                      </Button>
+
+                      <Button
+                        title=""
+                        color="delete"
+                        onClick={() => handleRemove(analyze.id)}
+                      >
+                        <FiDelete />
+                      </Button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {
-                    analysis.map(analyze => (
-                      <tr key={analyze.id}>
-                        <td>
-                          {analyze.description}
-                        </td>
-                        <td>
-                          {analyze.depth}
-                        </td>
-                        <td>
-                          <Button
-                            title=""
-                            color="alter"
-                            onClick={() => handleDetails(analyze.id)}
-                          >
-                            <GrUpdate />
-                          </Button>
-
-                          <Button
-                            title=""
-                            color="delete"
-                            onClick={() => handleRemove(analyze.id)}
-                          >
-                            <FiDelete />
-
-                          </Button>
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-            )
-          }
+                ))}
+              </tbody>
+            </table>
+          )}
         </main>
 
         {/* <Section title="Minhas áreas">
@@ -132,11 +142,9 @@ export function Analysis() {
             ))
           }
         </Section> */}
-
       </Content>
 
-      <New to="/newAnalyze" />
-
+      <New to="/analyze" />
     </Container>
   );
 }

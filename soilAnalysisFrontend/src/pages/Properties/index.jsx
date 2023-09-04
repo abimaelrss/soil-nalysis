@@ -25,7 +25,7 @@ export function Properties() {
   const navigate = useNavigate();
 
   function handleUpdate(id) {
-    navigate(`/newProperty/${id}`);
+    navigate(`/property/${id}`);
   }
 
   async function fetchProperties() {
@@ -116,7 +116,7 @@ export function Properties() {
         </main>
       </Content>
 
-      <New to="/newProperty" />
+      <New to="/property" />
     </Container>
   );
 }

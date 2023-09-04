@@ -23,7 +23,7 @@ export function Areas() {
   const navigate = useNavigate();
 
   function handleUpdate(area_id) {
-    navigate(`/newArea/${area_id}`);
+    navigate(`/area/${area_id}`);
   }
 
   async function fetchAreas() {
@@ -120,7 +120,7 @@ export function Areas() {
         </Section> */}
       </Content>
 
-      <New to="/newArea" />
+      <New to="/area" />
     </Container>
   );
 }

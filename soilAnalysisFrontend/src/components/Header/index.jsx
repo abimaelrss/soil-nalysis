@@ -43,7 +43,7 @@ export function Header() {
           properties.length == 0 ? (
             <Button
               title="CADASTRAR PROPRIEDADE"
-              onClick={() => navigate("/newProperty")}
+              onClick={() => navigate("/property")}
             />
           ) : (
             properties.length != 0 && (
