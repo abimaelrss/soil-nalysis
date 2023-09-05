@@ -32,7 +32,8 @@ export const Content = styled.div`
     select {
       font-size: 16px;
       padding: 5px;
-      width: 200px;
+      margin: 0 0 10px;
+      width: auto;
 
       border-radius: 5px;
     }

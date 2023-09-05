@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -7,11 +7,11 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 230px auto;
   grid-template-rows: 50px 50px auto 64px;
-  grid-template-areas: 
-  "brand header"
-  "menu search"
-  "menu content"
-  "menu footer";
+  grid-template-areas:
+    "brand header"
+    "menu content"
+    "menu content"
+    "menu footer";
 `;
 
 export const Search = styled.div`
@@ -24,6 +24,6 @@ export const Content = styled.div`
 
   display: flex;
   gap: 10px;
-  padding: 0 64px;
+  padding: 0 14px;
   overflow-y: auto;
 `;

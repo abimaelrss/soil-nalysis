@@ -11,7 +11,6 @@ import { Areas } from "../pages/Areas";
 import { Area } from "../pages/Area";
 import { Analysis } from "../pages/Analysis";
 import { Analyze } from "../pages/Analyze";
-import { Reports } from "../pages/Reports";
 import { NewReport } from "../pages/NewReport";
 import { Notes } from "../pages/Notes";
 
@@ -36,7 +35,6 @@ export function AppRoutes() {
       <Route path="/analysis/:id" element={<Analysis />} />
       <Route path="/analyze" element={<Analyze />} />
       <Route path="/analyze/:id" element={<Analyze />} />
-      <Route path="/reports" element={<Reports />} />
       <Route path="/newReport" element={<NewReport />} />
     </Routes>
   );

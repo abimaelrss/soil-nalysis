@@ -24,16 +24,8 @@ export const Content = styled.div`
 `
 
 export const Form = styled.div`
-  max-width: 550px;
+  width: 80%;
   margin: 38px auto;
-
-  > header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 36px;
-  }
 
   .baseboard {
     width: 100%;

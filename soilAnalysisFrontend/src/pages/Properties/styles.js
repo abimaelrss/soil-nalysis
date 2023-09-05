@@ -1,18 +1,17 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
 
-  
   display: grid;
   grid-template-columns: 230px auto;
   grid-template-rows: 50px 50px auto 50px;
-  grid-template-areas: 
-  "brand header"
-  "menu content"
-  "menu content"
-  "menu content";
+  grid-template-areas:
+    "brand header"
+    "menu content"
+    "menu content"
+    "menu content";
 `;
 
 export const Search = styled.div`
@@ -37,17 +36,17 @@ export const Content = styled.div`
       text-align: center;
 
       thead {
-        background: #F1F1F1;
+        background: #f1f1f1;
       }
-      
+
       tbody tr:nth-child(even) {
-        background: #F9F9F9;
+        background: #f9f9f9;
       }
-      
+
       tbody tr:nth-child(odd) {
-        background: #F1F1F1;
+        background: #f1f1f1;
       }
-      
+
       tbody td {
         padding-left: 20px;
       }
@@ -60,5 +59,4 @@ export const Content = styled.div`
       justify-content: space-between;
     }
   }
-
 `;

@@ -97,7 +97,6 @@ export function Area() {
       <Content>
         <Form>
           <h1>Cadastrar áreas</h1>
-          <ButtonText title="Voltar" onClick={handleBack} />
 
           <Input
             placeholder="Nome"

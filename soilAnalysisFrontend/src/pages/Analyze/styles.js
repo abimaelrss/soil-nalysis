@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -7,11 +7,20 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 230px auto;
   grid-template-rows: 50px 50px auto 64px;
-  grid-template-areas: 
-  "brand header"
-  "menu content"
-  "menu content"
-  "menu content";
+  grid-template-areas:
+    "brand header"
+    "menu content"
+    "menu content"
+    "menu content";
+
+  select {
+    font-size: 16px;
+    padding: 5px;
+    margin: 0 0 10px;
+    width: auto;
+
+    border-radius: 5px;
+  }
 `;
 
 export const Content = styled.div`
@@ -21,18 +30,31 @@ export const Content = styled.div`
   gap: 10px;
   padding: 0 34px;
   overflow-y: auto;
-`
+`;
 
 export const Form = styled.div`
-  max-width: 550px;
   margin: 38px auto;
 
-  > header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  background: #fff;
 
-    margin-bottom: 36px;
+  > table th {
+    /* border: solid 1px; */
+  }
+
+  table {
+    text-align: center;
+
+    thead {
+      background: #f1f1f1;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #f1f1f1;
+    }
   }
 
   .baseboard {
@@ -47,4 +69,11 @@ export const Form = styled.div`
     /* background-color: ${({ theme }) => theme.COLORS.BACKGROUND_700}; */
     background-color: rgb(255, 255, 255);
   }
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  height: 40px;
+
+  text-align: center;
 `;

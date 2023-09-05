@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FiDelete, FiPlus } from "react-icons/fi";
+import { BiSolidReport } from "react-icons/bi";
 import { GrUpdate } from "react-icons/gr";
 
 import { api } from "../../services/api";
@@ -31,7 +32,7 @@ export function Analysis() {
   }
 
   async function fetchAnalysis() {
-    const response = await api.get(`/analysis?area_id=${selectedArea}`);
+    const response = await api.get(`/analysis?property_id=${selectedProperty}`);
     setAnalysis(response.data);
   }
 
@@ -83,38 +84,27 @@ export function Analysis() {
         </Navigation>
 
         <main>
-          <select
-            value={selectedArea}
-            onChange={(event) => setSelectedArea(event.target.value)}
-          >
-            <option value="">Selecione a área</option>
-            {areas.map((area) => (
-              <option key={area.id} value={area.id}>
-                {area.name}
-                {/* <Note
-                    key={String(property.id)}
-                    data={property}
-                    onClick={() => handleDetails(properties.id)}
-                  /> */}
-              </option>
-            ))}
-          </select>
-          {/* {analysis.length == 0 && <p>Não existem análises cadastradas!</p>} */}
-
+        {analysis.length == 0 && (
+          <p>Não existe análise cadastrada!</p>
+        )}
           {analysis.length != 0 && (
             <table>
               <thead>
                 <tr>
+                  <th>Nome</th>
                   <th>Descrição</th>
-                  <th>Tamanho</th>
+                  <th>Profundidade</th>
+                  <th>Área</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {analysis.map((analyze) => (
                   <tr key={analyze.id}>
+                    <td>{analyze.name}</td>
                     <td>{analyze.description}</td>
                     <td>{analyze.depth}</td>
+                    <td>{analyze.areaName}</td>
                     <td>
                       <Button
                         title=""
@@ -131,6 +121,14 @@ export function Analysis() {
                       >
                         <FiDelete />
                       </Button>
+
+                      <Button
+                        title=""
+                        color="report"
+                        // onClick={() => handleRemove(analyze.id)}
+                      >
+                        <BiSolidReport />
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -138,18 +136,6 @@ export function Analysis() {
             </table>
           )}
         </main>
-
-        {/* <Section title="Minhas áreas">
-          {
-            areas.map(area => (
-              <Note
-                key={String(area.id)}
-                data={area}
-                onClick={() => handleDetails(area.id)}
-              />
-            ))
-          }
-        </Section> */}
       </Content>
     </Container>
   );

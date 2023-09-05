@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { RiShutDownLine } from "react-icons/ri";
+import { LuMilk } from "react-icons/lu";
 
 import { useAuth } from "../../hooks/auth";
 import { useProperty } from "../../hooks/propertyProvider";
@@ -38,6 +39,7 @@ export function Header() {
       </Profile>
 
       <Farm>
+        
         {
           // console.log(properties.length)
           properties.length == 0 ? (
@@ -47,7 +49,7 @@ export function Header() {
             />
           ) : (
             properties.length != 0 && (
-              <select
+              <select 
                 value={selectedProperty}
                 onChange={(event) => setSelectedProperty(event.target.value)}
               >

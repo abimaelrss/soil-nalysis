@@ -1,21 +1,24 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.button`
   /* background-color: ${({ theme }) => theme.COLORS.ORANGE}; */
   /* color: ${({ theme }) => theme.COLORS.BACKGROUND_800}; */
   /* background-color: #3CB371; */
-  background-color: ${props => {
+  background-color: ${(props) => {
     if (props.color == "save") {
-      return "#3CB371"
+      return "#3CB371";
     }
     if (props.color == "alter") {
-      return "#ADD8E6"
+      return "#ADD8E6";
     }
     if (props.color == "delete") {
-      return "#FF6347"
+      return "#FF6347";
+    }
+    if (props.color == "report") {
+      return "#DAA520";
     }
     if (props.color == "back") {
-      return "#F1F1F1"
+      return "#F1F1F1";
     }
   }};
   color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
