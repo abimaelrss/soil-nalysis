@@ -200,44 +200,44 @@ export function Analyze() {
 
   async function fetchAnalyze() {
     const response = await api.get(`/analysis/${params.id}`);
-    setName(response.data.name);
-    setDescription(response.data.description);
-    setDepth(response.data.depth);
-    setSmp(response.data.smp);
-    setCacl(response.data.cacl);
-    setH2o(response.data.h2o);
-    setCaPlusMg(response.data.caPlusMg);
-    setCa(response.data.ca);
-    setMg(response.data.mg);
-    setAl(response.data.al);
-    setHAl(response.data.hAl);
-    setK(response.data.k);
-    setPMel(response.data.pMel);
-    setPRes(response.data.pRes);
-    setPRem(response.data.pRem);
-    setS(response.data.s);
-    setB(response.data.b);
-    setCu(response.data.cu);
-    setFe(response.data.fe);
-    setMn(response.data.mn);
-    setZn(response.data.zn);
-    setNa(response.data.na);
-    setArgila(response.data.argila);
-    setSilte(response.data.silte);
-    setAreia(response.data.areia);
-    setMo(response.data.mo);
-    setCo(response.data.co);
-    setTezao(response.data.tezao);
-    setTezin(response.data.tezin);
-    setV(response.data.v);
-    setSatAl(response.data.satAl);
-    setCaCtc(response.data.caCtc);
-    setMgCtc(response.data.mgCtc);
-    setKCtc(response.data.kCtc);
-    setHAlCtc(response.data.hAlCtc);
-    setCaMg(response.data.caMg);
-    setCaK(response.data.caK);
-    setMgK(response.data.mgK);
+    setName(response.data.name || "");
+    setDescription(response.data.description || "");
+    setDepth(response.data.depth || "");
+    setSmp(response.data.smp || "");
+    setCacl(response.data.cacl || "");
+    setH2o(response.data.h2o || "");
+    setCaPlusMg(response.data.caPlusMg || "");
+    setCa(response.data.ca || "");
+    setMg(response.data.mg || "");
+    setAl(response.data.al || "");
+    setHAl(response.data.hAl || "");
+    setK(response.data.k || "");
+    setPMel(response.data.pMel || "");
+    setPRes(response.data.pRes || "");
+    setPRem(response.data.pRem || "");
+    setS(response.data.s || "");
+    setB(response.data.b || "");
+    setCu(response.data.cu || "");
+    setFe(response.data.fe || "");
+    setMn(response.data.mn || "");
+    setZn(response.data.zn || "");
+    setNa(response.data.na || "");
+    setArgila(response.data.argila || "");
+    setSilte(response.data.silte || "");
+    setAreia(response.data.areia || "");
+    setMo(response.data.mo || "");
+    setCo(response.data.co || "");
+    setTezao(response.data.tezao || "");
+    setTezin(response.data.tezin || "");
+    setV(response.data.v || "");
+    setSatAl(response.data.satAl || "");
+    setCaCtc(response.data.caCtc || "");
+    setMgCtc(response.data.mgCtc || "");
+    setKCtc(response.data.kCtc || "");
+    setHAlCtc(response.data.hAlCtc || "");
+    setCaMg(response.data.caMg || "");
+    setCaK(response.data.caK || "");
+    setMgK(response.data.mgK || "");
   }
 
   async function fetchAreas() {
@@ -246,9 +246,9 @@ export function Analyze() {
   }
 
   useEffect(() => {
-    fetchAnalyze();
+    params.id && fetchAnalyze();
     fetchAreas();
-  }, []);
+  }, [params.id]);
 
   return (
     <Container>
@@ -261,25 +261,25 @@ export function Analyze() {
       <Content>
         <Form>
           <h1>Cadastrar áreas</h1>
-          {!params.id &&(
+          {!params.id && (
             <select
-            value={selectedArea}
-            onChange={(event) => setSelectedArea(event.target.value)}
-          >
-            <option value="">Selecione a área</option>
-            {areas.map((area) => (
-              <option key={area.id} value={area.id}>
-                {area.name}
-                {/* <Note
+              value={selectedArea}
+              onChange={(event) => setSelectedArea(event.target.value)}
+            >
+              <option value="">Selecione a área</option>
+              {areas.map((area) => (
+                <option key={area.id} value={area.id}>
+                  {area.name}
+                  {/* <Note
                     key={String(property.id)}
                     data={property}
                     onClick={() => handleDetails(properties.id)}
                   /> */}
-              </option>
-            ))}
-          </select>
+                </option>
+              ))}
+            </select>
           )}
-          
+
           <table>
             <thead>
               <tr>

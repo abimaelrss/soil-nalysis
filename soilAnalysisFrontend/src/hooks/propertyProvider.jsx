@@ -34,6 +34,7 @@ function PropertyProvider({ children }) {
 
   useEffect(() => {
     !selectedProperty && navigate("/");
+    console.log(selectedProperty);
   }, [selectedProperty]);
 
   useEffect(() => {

@@ -14,32 +14,20 @@ import { Footer } from "../../components/Footer";
 import { useProperty } from "../../hooks/propertyProvider";
 
 export function Home() {
-  const [properties, setProperties ] = useState([]);
+  const [properties, setProperties] = useState([]);
   const { selectedProperty } = useProperty();
   const [areas, setAreas] = useState([]);
   const [analysis, setAnalysis] = useState([]);
 
   const navigate = useNavigate();
 
-  async function fetchProperties() {
-    const response = await api.get("/properties");
+  async function fetchPropertiesAreasAnalysis() {
+    const response = await api.get("/users");
     setProperties(response.data);
   }
 
-  async function fetchAreas() {
-    const response = await api.get(`/areas?property_id=${selectedProperty}`);
-    setAreas(response.data);
-  }
-
-  async function fetchAnalysis() {
-    const response = await api.get(`/analysis?property_id=${selectedProperty}`);
-    setAnalysis(response.data);
-  }
-
   useEffect(() => {
-    fetchProperties();
-    fetchAreas();
-    fetchAnalysis();
+    fetchPropertiesAreasAnalysis();
   }, [selectedProperty]);
 
   return (
@@ -51,11 +39,13 @@ export function Home() {
       <Menu />
 
       <Content>
-        <Article title="Total de propriedades">{properties.length}</Article>
+        <Article title="Total de propriedades">
+          {properties.totalProperties}
+        </Article>
 
-        <Article title="Total de áreas">{areas.length}</Article>
+        <Article title="Total de áreas">{properties.totalAreas}</Article>
 
-        <Article title="Total de análises">{analysis.length}</Article>
+        <Article title="Total de análises">{properties.totalAnalysis}</Article>
       </Content>
 
       <Footer />

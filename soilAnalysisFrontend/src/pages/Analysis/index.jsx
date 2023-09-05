@@ -54,7 +54,7 @@ export function Analysis() {
   useEffect(() => {
     fetchAnalysis();
     fetchAreas();
-  }, [selectedArea]);
+  }, [selectedProperty]);
 
   return (
     <Container>
