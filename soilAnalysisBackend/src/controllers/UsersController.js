@@ -86,20 +86,28 @@ class UserController {
   async countAll(request, response) {
     const user_id = request.user.id;
 
-    const countProperties = await knex("properties")
-      .count({ total: "*" })
-      .where("user_id", "=", user_id);
+    const [[{ totalProperties }], [{ totalAreas }], [{ totalAnalysis }]] =
+      await Promise.all([
+        knex("properties")
+          .where("properties.user_id", "=", user_id)
+          .count({ totalProperties: "*" }),
 
-    const countAreas = await knex("areas")
-      .count({ total: "*" })
-      .where("user_id", "=", user_id);
+        knex("properties")
+          .join("areas", "areas.property_id", "=", "properties.id")
+          .where("properties.user_id", "=", user_id)
+          .count({ totalAreas: "*" }),
 
-    const countAnalysis = await knex("analysis")
-      .count({ total: "*" })
-      .where("user_id", "=", user_id);
+        knex("properties")
+          .join("areas", "areas.property_id", "=", "properties.id")
+          .join("analysis", "analysis.area_id", "=", "areas.id")
+          .where("properties.user_id", "=", user_id)
+          .count({ totalAnalysis: "*" }),
+      ]);
 
     const data = {
-      totalProperties: countProperties[0].total,
+      totalProperties,
+      totalAreas,
+      totalAnalysis,
     };
 
     return response.json(data);
