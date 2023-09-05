@@ -1,5 +1,5 @@
-
-exports.up = knex => knex.schema.createTable("analysis", table => {
+exports.up = (knex) =>
+  knex.schema.createTable("analysis", (table) => {
     table.increments("id");
     table.text("name");
     table.text("description");
@@ -7,8 +7,48 @@ exports.up = knex => knex.schema.createTable("analysis", table => {
     table.double("smp");
     table.double("cacl");
     table.double("h2o");
-    table.integer("area_id").references("id").inTable("areas").onDelete("CASCADE");
+    table.double("caPlusMg");
+    table.double("ca");
+    table.double("mg");
+    table.double("al");
+    table.double("hAl");
+    table.double("k");
+    table.double("pMel");
+    table.double("pRes");
+    table.double("pRem");
+    table.double("s");
+    table.double("b");
+    table.double("cu");
+    table.double("fe");
+    table.double("mn");
+    table.double("zn");
+    table.double("na");
+    table.double("argila");
+    table.double("silte");
+    table.double("areia");
+    table.double("mo");
+    table.double("co");
+    table.double("tezao");
+    table.double("tezin");
+    table.double("v");
+    table.double("satAl");
+    table.double("caCtc");
+    table.double("mgCtc");
+    table.double("kCtc");
+    table.double("hAlCtc");
+    table.double("caMg");
+    table.double("caK");
+    table.double("mgK");
+    table
+      .integer("area_id")
+      .references("id")
+      .inTable("areas")
+      .onDelete("CASCADE");
+    table
+      .integer("property_id")
+      .references("id")
+      .inTable("properties")
+      .onDelete("CASCADE");
   });
-  
-  exports.down = knex => knex.schema.dropTable("analysis");
-  
+
+exports.down = (knex) => knex.schema.dropTable("analysis");
