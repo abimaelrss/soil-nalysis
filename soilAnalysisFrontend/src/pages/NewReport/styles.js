@@ -6,7 +6,7 @@ export const Container = styled.div`
 
   display: grid;
   grid-template-columns: 230px auto;
-  grid-template-rows: 50px 50px auto 64px;
+  grid-template-rows: 80px 80px auto 64px;
   grid-template-areas: 
   "brand header"
   "menu content"

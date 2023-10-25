@@ -4,6 +4,9 @@ import { FiPlus, FiSearch, FiHome } from "react-icons/fi";
 
 import { api } from "../../services/api";
 
+import { useAuth } from "../../hooks/auth";
+import { USER_ROLE } from "../../utils/roles";
+
 import { Container, Content } from "./styles";
 
 import { Brand } from "../../components/Brand";
@@ -14,6 +17,8 @@ import { Footer } from "../../components/Footer";
 import { useProperty } from "../../hooks/propertyProvider";
 
 export function Home() {
+  const { user } = useAuth();
+
   const [properties, setProperties] = useState([]);
   const { selectedProperty } = useProperty();
   const [areas, setAreas] = useState([]);
@@ -39,13 +44,26 @@ export function Home() {
       <Menu />
 
       <Content>
-        <Article title="Total de propriedades">
-          {properties.totalProperties}
-        </Article>
+        {user.role === USER_ROLE.ADMIN && (
+          <>
+            <Article title="Total de usuários"></Article>
+            <Article title="Total de culturas"></Article>
+          </>
+        )}
 
-        <Article title="Total de áreas">{properties.totalAreas}</Article>
+        {user.role === USER_ROLE.CUSTOMER && (
+          <>
+            <Article title="Total de propriedades">
+              {properties.totalProperties}
+            </Article>
 
-        <Article title="Total de análises">{properties.totalAnalysis}</Article>
+            <Article title="Total de áreas">{properties.totalAreas}</Article>
+
+            <Article title="Total de análises">
+              {properties.totalAnalysis}
+            </Article>
+          </>
+        )}
       </Content>
 
       <Footer />

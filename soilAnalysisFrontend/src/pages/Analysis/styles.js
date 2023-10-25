@@ -6,7 +6,7 @@ export const Container = styled.div`
 
   display: grid;
   grid-template-columns: 230px auto;
-  grid-template-rows: 50px 50px auto 64px;
+  grid-template-rows: 80px 80px auto 64px;
   grid-template-areas:
     "brand header"
     "menu content"
@@ -28,6 +28,27 @@ export const Content = styled.div`
     padding: 10px;
     border-top: 3px solid green;
     background-color: rgb(255, 255, 255);
+
+    summary{
+      all: unset;
+      padding: 1.6rem;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    details {
+
+    }
+
+    ul {
+      padding-bottom: 1.6rem;
+      font-size: .8rem;
+      list-style: none;
+    }
+
+    li + li {
+      margin-top: .5rem;
+    }
 
     select {
       font-size: 16px;

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 50%;
-  height: 100px;
+  width: 100%;
+  /* height: 100px; */
 
   margin: 28px 0;
   padding: 10px;
+
+  text-align: center;
 
   /* background-color: ${({ theme }) => theme.COLORS.BACKGROUND_700}; */
   background-color: rgb(255, 255, 255);

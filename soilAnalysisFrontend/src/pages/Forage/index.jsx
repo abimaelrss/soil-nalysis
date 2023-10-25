@@ -16,13 +16,13 @@ import { Menu } from "../../components/Menu";
 import { PropertyProvider, useProperty } from "../../hooks/propertyProvider";
 import { useAuth } from "../../hooks/auth";
 
-export function Area() {
+export function Forage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [size, setSize] = useState("");
 
-  const [cultures, setCultures] = useState([]);
-  const [selectedCulture, setSelectedCulture] = useState();
+  const [forages, setForages] = useState([]);
+  const [selectedForage, setSelectedForage] = useState();
 
   const params = useParams();
 
@@ -85,14 +85,14 @@ export function Area() {
     setSize(response.data.size);
   }
 
-  async function fetchCultures() {
-    const response = await api.get(`/cultures?culture_id=${selectedCulture}`);
+  async function fetchForages() {
+    const response = await api.get(`/forages?forage_id=${selectedForage}`);
     setAreas(response.data);
   }
 
   useEffect(() => {
-    fetchAreas();
-    // fetchCultures();
+    // fetchAreas();
+    // fetchForages();
   }, []);
 
   return (
@@ -105,7 +105,7 @@ export function Area() {
 
       <Content>
         <Form>
-          <h1>Cadastrar áreas</h1>
+          <h1>Cadastrar forragem</h1>
 
           <Input
             placeholder="Nome"
@@ -130,13 +130,13 @@ export function Area() {
 
           {!params.id && (
             <select
-              value={selectedCulture}
-              onChange={(event) => setSelectedCulture(event.target.value)}
+              value={selectedForage}
+              onChange={(event) => setSelectedForage(event.target.value)}
             >
-              <option value="">Selecione a cultura</option>
-              {cultures.map((culture) => (
-                <option key={culture.id} value={culture.id}>
-                  {culture.name}
+              <option value="">Selecione o grupo</option>
+              {forages.map((forage) => (
+                <option key={forage.id} value={forage.id}>
+                  {forage.name}
                   {/* <Note
                     key={String(property.id)}
                     data={property}

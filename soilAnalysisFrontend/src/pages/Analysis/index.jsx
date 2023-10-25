@@ -31,6 +31,10 @@ export function Analysis() {
     navigate(`/analyze/${analyze_id}`);
   }
 
+  function handleInterpretation(analyze_id) {
+    navigate(`/interpretation/${analyze_id}`);
+  }
+
   async function fetchAnalysis() {
     const response = await api.get(`/analysis?property_id=${selectedProperty}`);
     setAnalysis(response.data);
@@ -84,9 +88,14 @@ export function Analysis() {
         </Navigation>
 
         <main>
-        {analysis.length == 0 && (
-          <p>Não existe análise cadastrada!</p>
-        )}
+          {/* <details>
+            <summary>Stage 01</summary>
+            <ul>
+              <li>asdf</li>
+              <li>asdf</li>
+            </ul>
+          </details> */}
+          {analysis.length == 0 && <p>Não existe análise cadastrada!</p>}
           {analysis.length != 0 && (
             <table>
               <thead>
@@ -125,7 +134,7 @@ export function Analysis() {
                       <Button
                         title=""
                         color="report"
-                        // onClick={() => handleRemove(analyze.id)}
+                        onClick={() => handleInterpretation(analyze.id)}
                       >
                         <BiSolidReport />
                       </Button>

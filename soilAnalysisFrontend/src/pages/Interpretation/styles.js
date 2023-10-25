@@ -26,10 +26,41 @@ export const Container = styled.div`
 export const Content = styled.div`
   grid-area: content;
 
-  display: flex;
-  gap: 10px;
-  padding: 0 34px;
+  /* display: flex; */
+  /* gap: 10px; */
+  padding: 0 14px;
   overflow-y: auto;
+
+  main {
+    /* display: flex; */
+    /* gap: 2rem; */
+
+    /* padding: 1rem; */
+
+    table {
+      width: 100%;
+      /* text-align: center; */
+
+      background: #f1f1f1;
+      thead {
+      }
+
+      tr {
+      }
+
+      tr:nth-child(even) {
+        /* background: green; */
+      }
+      
+      tr:nth-child(odd) {
+        background: #836FFF;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export const Form = styled.div`
@@ -45,7 +76,6 @@ export const Form = styled.div`
 
   table {
     width: 100%;
-
     text-align: center;
 
     thead {
@@ -58,6 +88,12 @@ export const Form = styled.div`
 
     tbody tr:nth-child(odd) {
       background: #f1f1f1;
+    }
+
+    .resultInterpretation{
+      background: #8FBC8F;
+      /* color: ${({ theme }) => theme.COLORS.WHITE}; */
+      color: green;
     }
   }
 
@@ -77,7 +113,7 @@ export const Form = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  height: 40px;
+  height: 1.5rem;
 
   text-align: center;
 `;

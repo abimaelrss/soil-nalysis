@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { RiShutDownLine } from "react-icons/ri";
+import { FiUser } from "react-icons/fi";
+import { GoSignOut } from "react-icons/go";
 import { LuMilk } from "react-icons/lu";
 
 import { useAuth } from "../../hooks/auth";
+import { USER_ROLE } from "../../utils/roles";
+
 import { useProperty } from "../../hooks/propertyProvider";
 
 import { api } from "../../services/api";
@@ -35,21 +39,23 @@ export function Header() {
         <div>
           <span>Bem vindo</span>
           <strong>{user.name}</strong>
+          <small>
+            <FiUser /> Perfil de {user.role}
+          </small>
         </div>
       </Profile>
 
       <Farm>
-        
-        {
+        {user.role === USER_ROLE.CUSTOMER &&
           // console.log(properties.length)
-          properties.length == 0 ? (
+          (properties.length == 0 ? (
             <Button
               title="CADASTRAR PROPRIEDADE"
               onClick={() => navigate("/property")}
             />
           ) : (
             properties.length != 0 && (
-              <select 
+              <select
                 value={selectedProperty}
                 onChange={(event) => setSelectedProperty(event.target.value)}
               >
@@ -66,14 +72,11 @@ export function Header() {
                 ))}
               </select>
             )
-          )
-        }
-
-        {}
+          ))}
       </Farm>
 
       <Logout onClick={handleSignOut}>
-        <RiShutDownLine />
+        <GoSignOut />
       </Logout>
     </Container>
   );
